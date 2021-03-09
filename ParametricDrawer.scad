@@ -9,8 +9,10 @@ difference(){
         }
         //Handle
         translate([0,drawerpositionY-drawerdepth/2-handledepth/2,-drawerheight/2+bottomthickness/2]){
-            translate([0,0,(drawerheight/2)])
-                cube([handlewidth,handledepth,bottomthickness],true);
+            translate([0,2,(drawerheight/2)])                       //find the middle of the drawer
+                cube([handlewidth/2,handledepth,bottomthickness*2],true);
+            translate([0,2-handledepth,(drawerheight/2)]) 
+                cube([handlewidth,handledepth,handledepth],true);
             
         }
     }
@@ -18,4 +20,5 @@ difference(){
     translate([0,drawerpositionY,bottomthickness]){
         cube([drawerwidth-thickness*2,drawerdepth-thickness*2,drawerheight],true);
     }
+
 }
