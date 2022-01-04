@@ -39,7 +39,7 @@ difference() {
 
 // simple SCREW with hexagonal head:
 translate([0,0,-clip_height_mm/2]) {
-thread_for_screw(diameter=6.25, length=clip_thickness_mm*3); 
+thread_for_screw(diameter=6.30, length=clip_thickness_mm*3); 
 cylinder(d=15, h=4, $fn=6);}
 
     //this is the inside bit - remove after - used for showing where the tube will go
