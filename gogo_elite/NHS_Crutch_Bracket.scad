@@ -5,7 +5,7 @@
 
 
 // (in mm)
-Clip_Diameter = 30;
+Clip_Diameter = 25;
 
 // (in mm)
 Clip_Thickness = 15;
