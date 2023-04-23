@@ -2,7 +2,7 @@
 thickness = 4;
 
 // how high it will protrude from the build plate
-width = 18;
+width = 20;
 
 // the length of the part that goes onto the shelf
 length = 30;
@@ -26,22 +26,43 @@ trough = 30;
 Clip_Diameter = 13;
 
 // (in mm)
-Clip_Thickness = 18;
+Clip_Thickness = 20;
 
 $fn=100;
 TZT_Rad=Clip_Diameter/2;
 TZT_Thk=Clip_Thickness;
 
 
+/*[ Zigzag repeats ]*/
+repeats = 5;//[0:200]
+
+/*[ Thickness ]*/
+zigzag_thickness = 5;//[1:200]
+
+/*[ Long edge length ]*/
+longEdgeLength = Clip_Thickness;  //10;//[2:500]
+
+/*[ Short edge length ]*/
+shortEdgeLength = 20;//[1:200]
+
+//Scale some values down a bit, to enable user finer control.
+thickness2 = zigzag_thickness / 10;
+shortEdgeLength2 = shortEdgeLength / 10;
+
+
 module hook() {
   union() {
     // the part above the shelf
     translate([-length, 0, 0])
+      union() {
     cube([length, width, thickness]);
+    translate([0, 0, -0.5])  makeLoops(repeats);}
 
 	 // the part below the shelf
       translate([-length, 0, -(shelf+thickness)])
+    union() {
 	 cube([length, width, thickness]);
+     translate([0, 0, thickness])  makeLoops(repeats);}
 
     // the part that goes down to the hook
     translate([0, 0, -shelf-thickness])
@@ -89,3 +110,23 @@ union() {
     rotate([90, 0, 0]) translate([11,-10,-9]) TZT_CLIP();
 }
 
+
+
+module makeLoops(repeats) {
+    for(i=[0:repeats]) {
+        translate([(thickness2 * 2 + shortEdgeLength2 * 2) * i, 0, 0])
+            makeLoop();
+    }
+}
+
+module makeLoop() {
+    cube([shortEdgeLength2 / 2, thickness2, thickness2]);
+    translate([shortEdgeLength2 / 2, 0, 0])
+        cube([thickness2, longEdgeLength, thickness2]);
+    translate([(shortEdgeLength2 / 2) + thickness2, longEdgeLength - thickness2, 0])
+        cube([shortEdgeLength2, thickness2, thickness2]);
+    translate([(thickness2) + shortEdgeLength2 + (shortEdgeLength2 / 2), 0, 0])
+        cube([thickness2, longEdgeLength, thickness2]);
+    translate([(thickness2 * 2) + shortEdgeLength2 + (shortEdgeLength2 / 2), 0, 0])
+        cube([shortEdgeLength2 / 2, thickness2, thickness2]);
+}
