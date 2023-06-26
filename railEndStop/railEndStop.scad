@@ -1,6 +1,7 @@
 $fn=100;
 
-insideDiameter=10;
+tolerance=0.4;
+insideDiameter=10 + tolerance;
 endStopLength=20;
 thickness=2;
 endStopDiameter=22;
