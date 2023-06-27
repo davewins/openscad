@@ -6,11 +6,11 @@
 
 // (in mm)
 Clip_Diameter = 25;
-Small_Clip_Diameter = 23;
+Small_Clip_Diameter = 24;
 
 // (in mm)
-Clip_Thickness = 25.3;
-Small_Clip_Thickness = 16;
+Clip_Thickness = 26.4;
+Small_Clip_Thickness = 15;
 
 /* [Hidden] */
 
@@ -20,7 +20,7 @@ union() {
 TZT_CLIP(Clip_Diameter, Clip_Thickness);
 translate([-30,0,0]) rotate([0,180,0])
 TZT_CLIP(Clip_Diameter, Clip_Thickness);
-translate([-15,26.5,0]) rotate([90,0,90])
+translate([-15,27,0]) rotate([90,0,90])
 TZT_CLIP(Small_Clip_Diameter, Small_Clip_Thickness);
 }
 
