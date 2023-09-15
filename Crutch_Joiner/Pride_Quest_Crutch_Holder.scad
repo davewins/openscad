@@ -6,11 +6,11 @@
 
 // (in mm)
 Clip_Diameter = 25;
-Small_Clip_Diameter = 24;
+Small_Clip_Diameter = 22.5;
 
 // (in mm)
 Clip_Thickness = 26.4;
-Small_Clip_Thickness = 15;
+Small_Clip_Thickness = 16.5;
 
 /* [Hidden] */
 
