@@ -1,6 +1,6 @@
 $fn=100;
 
-maxHeight=63;
+maxHeight=80;
 wallThickness=4;
 baseHeight=wallThickness;
 diameter=97;
@@ -9,6 +9,7 @@ r_hole1=1;
 r_hole2=2;
 r_hole3=3;
 distance=20;
+cableHoleDiameter=8;
     
     //translate([0, 0, baseHeight]) 
         difference() {
@@ -20,6 +21,8 @@ distance=20;
     translate([distance*cos(i*(360/n)),distance*sin(i*(360/n)),0]) cylinder(maxHeight+1,r_hole1, r_hole1, center=true);   
     translate([(distance+10)*cos((i+1/3)*(360/(n))),(distance+10)*sin((i+1/3)*(360/(n))),0]) cylinder(maxHeight+1,r_hole2,r_hole2,center=true);
     translate([(distance+20)*cos((i+2/3)*(360/(n))),(distance+20)*sin((i+2/3)*(360/(n))),0]) cylinder(maxHeight+1,r_hole3,r_hole3,center=true); 
+                          color([0,0,1]) translate([0,diameter/2+wallThickness,cableHoleDiameter+5]) rotate([90,0,0]) cylinder(wallThickness+1,d=cableHoleDiameter);
 
   }
         }
+        
