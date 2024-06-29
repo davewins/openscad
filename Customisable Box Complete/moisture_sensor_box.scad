@@ -1,10 +1,10 @@
 /* [Box Options] */
 // Dimension: Box outer X-Size [mm]
-box_Size_X          = 90;
+box_Size_X          = 65;
 // Dimension: Box outer Y-Size [mm]
-box_Size_Y          = 90;
+box_Size_Y          = 100;
 // Dimension: Box Inner height [mm]
-box_Inner_Height    = 25;
+box_Inner_Height    = 20;
 // Box bottom/top thickness
 box_BottomTop_Thickness =  1.6; // [0.6:0.2:3]
 // Edge corner radius 
@@ -22,7 +22,7 @@ barrier_Height     =  2;   // [1.0:0.2:8]
 barrier_Tolerance  =  0.8; // [0.0:0.1:1]
 /* [Mouting Screw Nose Options] */
 // Number of screw noses
-screwnose_Number        = 2; // [0:No noses, 2: one top/one bottom, 4: two top/two bottom]
+screwnose_Number        = 0; // [0:No noses, 2: one top/one bottom, 4: two top/two bottom]
 // Diameter of the noses' screw holes
 screwnose_Diameter      = 4; // [2:0.2:8]
 // Height of the noses
@@ -62,10 +62,12 @@ module box() {
 		// **************************
 		// ** YOUR OWN CUTOUTS HERE!
 		// **************************
-		cRadius = 4.0;
-		translate([box_Size_X/2+8,(box_Wall_Thickness+0.1), box_Wall_Thickness+((boxHeight-box_Wall_Thickness)/2)]) rotate([90,00,0]) cylinder(r=cRadius2, h=box_Wall_Thickness+0.2,$fn=50);
-		cRadius2 = 4.0;
-		translate([box_Size_X/2-8,(box_Wall_Thickness+0.1), box_Wall_Thickness+((boxHeight-box_Wall_Thickness)/2)]) rotate([90,00,0]) cylinder(r=cRadius, h=box_Wall_Thickness+0.2,$fn=50);
+		cRadius = 2.8;
+        		
+		translate([box_Size_X/2,(box_Wall_Thickness+0.1), box_Wall_Thickness+((boxHeight-box_Wall_Thickness)/2)]) rotate([90,00,0]) cylinder(r=cRadius, h=box_Wall_Thickness+0.2,$fn=50);
+
+		color([1,0,0]) translate([box_Size_X/2,(box_Size_X+box_Wall_Thickness+40), box_Wall_Thickness+((boxHeight-box_Wall_Thickness)/2)]) rotate([90,00,0]) cylinder(r=cRadius, h=box_Wall_Thickness+10,$fn=50);
+
 		// **************************
 		// ** / CUTOUTS
 		// **************************
@@ -144,7 +146,43 @@ module screwNose(screwholeDiameter=4, noseHeight=5) {
 		cylinder(r=screwholeDiameter/2, h=noseHeight, $fn=60);
 	}
 }
+
+module batteryclip () {
+    difference() {
+        hull () {
+            cube([4, 9, 14]);
+            translate([0,0, 15]) rotate([-90,0,0]) cylinder(r=2, h=9, $fn=180);
+        }
+        #translate([-9.25, -.1, 9.25]) rotate([-90,0,0]) cylinder(d=18.5, h=9.2, $fn=180);
+    }
+}
+
+module stud() {
+    difference() {
+        cylinder(r=2.5, h=3, $fn=180);
+        cylinder(r=.75, h=3.1, $fn=180);
+    }
+}
+
 box();
+
+// Battery Clips:
+translate([22.1, 25, 1.99]) batteryclip();
+translate([22.1, 50, 1.99]) batteryclip();
+
+// Studs for Wemos Mini D1
+translate([53, 46, 1.99]) stud();
+translate([32, 46, 1.99]) stud();
+translate([53, 13, 1.99]) stud();
+translate([32, 13, 1.99]) stud();
+
+// Studs for battery charger
+color([1,0,0]) translate([53, 87, 1.99]) stud();
+color([1,0,0]) translate([32, 87, 1.99]) stud();
+color([1,0,0]) translate([53, 54, 1.99]) stud();
+color([1,0,0]) translate([32, 54, 1.99]) stud();
+
+
 if (box_Size_X>box_Size_Y) {
 	translate([0, box_Size_Y+5+screwnose_Diameter+screwnose_Wall_Thickness, 0]) lid();	
 } else {

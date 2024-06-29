@@ -1,4 +1,4 @@
-use <libraries/Chamfer.scad>        
+use <../libraries/Chamfer.scad>        
 
 lcd_width=210.5;                    //Overall LCD Panel Width
 lcd_height=126;                     //Overall LCD Panel Height

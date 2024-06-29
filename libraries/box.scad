@@ -17,7 +17,7 @@
 //
 // Enjoy!  make Stuff!   Mark Johnston
 
-use <"Chamfer.scad">              //Allows window with slanted edges
+use <../libraries/Chamfer.scad>              //Allows window with slanted edges
 
 // Inside open space and wall thickness in mm of the main box itself. 
 inside_width  = 80;             //Inside open space in mm for the width
